@@ -7,6 +7,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("API is working! ✅");
+});
+
+module.exports = app;
+
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://<username>:<password>@cluster0.mongodb.net/users?retryWrites=true&w=majority', {
     useNewUrlParser: true,
