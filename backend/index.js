@@ -72,6 +72,6 @@ app.post('/forgot-password', (req, res) => {
 
 
 // Start server
-app.listen(3000, () => {
+/*app.listen(3000, () => {
     console.log("Server listening on http://127.0.0.1:3000");
-});
+});*/
