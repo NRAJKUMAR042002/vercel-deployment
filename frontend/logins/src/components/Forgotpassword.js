@@ -13,8 +13,12 @@ const Forgotpassword = () => {
         event.preventDefault();
 
         // Send request to the backend
-        axios
-            .post('http://localhost:3000/forgot-password', { email, securityquestion, securityanswer })
+       axios.post(`${process.env.REACT_APP_API_URL}/forgot-password`, {
+              email,
+              securityquestion,
+              securityanswer
+             })
+
             .then(response => {
                 // Display the retrieved password
                 if (response.data.password) {
