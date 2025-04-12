@@ -1,14 +1,36 @@
-// import React from 'react';
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  return (
-    <div style= {{backgroundImage : "linear-gradient(#00d5ff,#0095ff,rgba(93,0,255,.555))"}} className="d-flex flex-column justify-content-center align-items-center text-center vh-100">
-        <h1>Login Success Page</h1>
-        
-        <Link to='/login' className="btn btn-light my-5">Logout</Link>
-    </div>
-  )
-}
+  const navigate = useNavigate();
 
-export default Home
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  return (
+    <div
+      style={{
+        backgroundImage:
+          "linear-gradient(#00d5ff,#0095ff,rgba(93,0,255,.555))",
+      }}
+      className="d-flex flex-column justify-content-center align-items-center text-center vh-100"
+    >
+      <h1>Login Success Page</h1>
+
+      <Link
+        to="/login"
+        className="btn btn-light my-5"
+        onClick={() => localStorage.removeItem("isLoggedIn")}
+      >
+        Logout
+      </Link>
+    </div>
+  );
+};
+
+export default Home;
