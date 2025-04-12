@@ -30,6 +30,25 @@ const Register = () => {
         event.preventDefault();
         console.log("Form Submitted");
 
+        const [loading, setLoading] = useState(false);
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  setLoading(true);
+
+  // Do validation...
+
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/register`, { ... });
+    setLoading(false);
+    // rest logic...
+  } catch (err) {
+    setLoading(false);
+    console.log(err);
+  }
+};
+
+
         if (!/^\d{10}$/.test(phone)) {
             alert("Please enter a valid 10-digit mobile number.");
             return;
@@ -48,7 +67,10 @@ const Register = () => {
             return;
         }
         
-        axios.post( '${process.env.REACT_APP_API_URL}/register', {name, email, password,confirmpassword,phone,gender,securityquestion,securityanswer})
+       axios.post(`${process.env.REACT_APP_API_URL}/register`, { 
+  name, email, password, confirmpassword, phone, gender, securityquestion, securityanswer 
+})
+
         .then(result => {
             console.log(result);
             if(result.data === "Already registered"){
@@ -211,11 +233,16 @@ const Register = () => {
                             >
                             </input>
                         </div>
-                        <button type="submit" class="btn text-light shadow-lg bg-light">Register</button>
+                        <button type="submit" className="btn text-light shadow-lg bg-light">Register</button>
                     </form>
 
                     <p className='container '>Already have an account ?</p>
                     <Link to='/login' className="btn btn-danger w-25 shadow-lg  mb-5  rounded">Login</Link>
+
+                                   <button type="submit" className="btn btn-primary" disabled={loading}>
+  {loading ? 'Registering...' : 'Register'}
+</button>
+
                 </div>
             </div>
         </div>
