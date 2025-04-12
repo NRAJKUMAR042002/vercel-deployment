@@ -1,26 +1,35 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../components/login.css';
+import particlesJS from 'particles.js';
 
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
 
+    useEffect(() => {
+    particlesJS.load('particles-js', '/particles.json', function () {
+        console.log('particles.js config loaded');
+    });
+}, []);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post( 'http://localhost:3000/login', {email, password})
+        axios.post('https://your-backend.vercel.app/login', { email, password }, { withCredentials: true })
+
         .then(result => {
             console.log(result);
-            if(result.data === "Success"){
-                console.log("Login Success");
-                alert('Login successful!')
-                navigate('/home');
-            }
+           if (result.data === "Success") {
+    localStorage.setItem("isLoggedIn", true);
+    alert('Login successful!');
+    navigate('/home');
+}
+
             else{
                 alert('Incorrect password! Please try again.');
             }
