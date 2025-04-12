@@ -48,7 +48,7 @@ const Register = () => {
             return;
         }
         
-        axios.post( 'http://localhost:3000/register', {name, email, password,confirmpassword,phone,gender,securityquestion,securityanswer})
+        axios.post( '${process.env.REACT_APP_API_URL}/register', {name, email, password,confirmpassword,phone,gender,securityquestion,securityanswer})
         .then(result => {
             console.log(result);
             if(result.data === "Already registered"){
