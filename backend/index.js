@@ -6,7 +6,7 @@ const FormDataModel = require('./models/FormData');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://your-frontend.vercel.app'],
+  origin: ['http://localhost:3000', 'https://simpleloginandregisterform.vercel.app/'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
